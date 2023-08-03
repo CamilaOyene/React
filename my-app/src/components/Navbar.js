@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import '../components-css/Navbar.css';
 
 function Navbar() {
@@ -8,12 +9,16 @@ function Navbar() {
           <li>
             <a href="/">Home</a>
           </li>
-          <li>
-            <a href="/productos">Productos</a>
-          </li>
-          <li>
-            <a href="/carrito">Carrito</a>
-          </li>
+          <NavLink to={"/productos"}>
+            <li>
+              <a href="">Productos</a>
+            </li>
+          </NavLink>
+          <NavLink to={"/cart"}>
+            <li>
+              <a href="">Carrito</a>
+            </li>
+          </NavLink>
         </ul>
       </div>
     );

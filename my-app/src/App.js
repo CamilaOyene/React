@@ -2,8 +2,9 @@ import './App.css';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
-import Cart from './Cart';
+import Cart from './components/Cart';
 import React from 'react';
+import Products from './components/Products';
 
 function App() {
   return (
@@ -11,7 +12,9 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/cart" element={<Cart />} /> {/* Ruta diferente para Cart */}
+        <Route path="/cart" element={<Cart />} />{" "}
+        {/* Ruta diferente para Cart */}
+        <Route path="/productos" element={<Products />} />
       </Routes>
     </HashRouter>
   );
