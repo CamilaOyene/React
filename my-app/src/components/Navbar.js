@@ -11,12 +11,12 @@ function Navbar() {
           </li>
           <NavLink to={"/productos"}>
             <li>
-              <a href="">Productos</a>
+              <a href="/">Productos</a>
             </li>
           </NavLink>
           <NavLink to={"/cart"}>
             <li>
-              <a href="">Carrito</a>
+              <a href="/">Carrito</a>
             </li>
           </NavLink>
         </ul>
