@@ -1,27 +1,45 @@
 import { NavLink } from 'react-router-dom';
 import '../components-css/Navbar.css';
+import React, { useState } from 'react';
 
 function Navbar() {
-    return (
-      <div className="navbar">
-        <h1>Pre Entrega 1</h1>
-        <ul>
-          <li>
-            <a href="/">Home</a>
-          </li>
-          <NavLink to={"/productos"}>
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  return (
+    <div className="navbar">
+      <h1>Pre Entrega 1</h1>
+      <ul>
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li className={`dropdown ${isDropdownOpen ? 'open' : ''}`}>
+          <a href="#" onClick={toggleDropdown}>
+            Productos
+          </a>
+          <ul className="dropdown-content">
             <li>
-              <a href="/">Productos</a>
+              <NavLink to="/productos/celular">Celular</NavLink>
             </li>
-          </NavLink>
-          <NavLink to={"/cart"}>
             <li>
-              <a href="/">Carrito</a>
+              <NavLink to="/productos/television">Televisión</NavLink>
             </li>
+            <li>
+              <NavLink to="/productos/computadora">Computadora</NavLink>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <NavLink to="/cart">
+            Carrito
           </NavLink>
-        </ul>
-      </div>
-    );
-  }
-  
-  export default Navbar;
+        </li>
+      </ul>
+    </div>
+  );
+}
+
+export default Navbar;
