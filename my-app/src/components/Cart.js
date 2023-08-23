@@ -12,7 +12,7 @@ function Cart() {
       de compra de forma sencilla y segura.
     </p>
     <div className="text-center">
-      <NavLink to={"/productos"}>
+      <NavLink to={"/"}>
         <button>Comenzar</button>
       </NavLink>
     </div>

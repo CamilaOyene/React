@@ -35,13 +35,17 @@
     display: inline-block;
   }
   
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    z-index: 1;
-  }
+ .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #333;
+  min-width: 160px;
+  z-index: 1;
+  top: 100%; /* Coloca el menú debajo del elemento padre */
+  left: 0; /* Alinea el menú con el lado izquierdo del elemento padre */
+}
+
+
   
   .dropdown.open .dropdown-content {
     display: block;

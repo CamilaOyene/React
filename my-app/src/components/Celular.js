@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 import "../components-css/Cart.css";
-import tv from "../assets/tv.jpg";
-import tv2 from "../assets/tv2.jpg";
-import tv3 from "../assets/tv3.jpg";
+import celular from "../assets/iphone.jpg";
+import celular2 from "../assets/celular2.png";
+import celular3 from "../assets/celular3.jpg";
 
 const products = [
-
-  { id: 1, name: "Tv", price: 15, image: tv },
-  { id: 2, name: "Smart Tv", price: 15, image: tv2 },
-  { id: 3, name: "Tv", price: 15, image: tv3 },
-
+  { id: 1, name: "IPhone 11", price: 10, image: celular },
+  { id: 2, name: "Samsung Galaxy", price: 15, image: celular2 },
+  { id: 3, name: "Motorola G", price: 15, image: celular3 },
 ];
 
-function Tv() {
+function Celulares() {
   const [cartItems, setCartItems] = useState([]);
 
   // Agregar un producto al carrito
@@ -32,7 +30,7 @@ function Tv() {
 
   return (
     <div className="container mx-auto py-8">
-      <h2 className="cart-heading">TV</h2>
+      <h2 className="cart-heading">Celulares</h2>
       {products.length > 0 ? (
         <>
           <ul className="cart-list">
@@ -82,4 +80,4 @@ function Tv() {
   );
 }
 
-export default Tv;
+export default Celulares;

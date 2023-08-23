@@ -3,10 +3,20 @@ import "../components-css/Cart.css";
 import celular from "../assets/iphone.jpg";
 import tv from "../assets/tv.jpg";
 import aspiradora from "../assets/aspiradora.jpg";
+import tv2 from "../assets/tv2.jpg";
+import tv3 from "../assets/tv3.jpg";
+import celular2 from "../assets/celular2.png";
+import celular3 from "../assets/celular3.jpg";
+import aspiradora2 from "../assets/aspiradora.2jpg.jpg";
 const products = [
-  { id: 1, name: "Celular", price: 10, image: celular },
+  { id: 1, name: "IPhone 11", price: 10, image: celular },
   { id: 2, name: "Tv", price: 15, image: tv },
-  { id: 3, name: "Aspiradora", price: 20, image: aspiradora },
+  { id: 3, name: "Smart Tv", price: 15, image: tv2 },
+  { id: 4, name: "Aspiradora", price: 20, image: aspiradora },
+  { id: 5, name: "Tv", price: 15, image: tv3 },
+  { id: 6, name: "Samsung Galaxy", price: 15, image: celular2 },
+  { id: 7, name: "Motorola G", price: 15, image: celular3 },
+  { id: 8, name: "Aspiradora Clipart", price: 15, image: aspiradora2 },
 ];
 
 function Home() {
@@ -29,7 +39,7 @@ function Home() {
 
   return (
     <div className="container mx-auto py-8">
-      <h2 className="cart-heading">Carrito de Compras</h2>
+      <h2 className="cart-heading"></h2>
       {products.length > 0 ? (
         <>
           <ul className="cart-list">
@@ -38,7 +48,7 @@ function Home() {
                 <img src={item.image} alt={item.name} />
                 <div className="cart-item-details">
                   <span className="cart-item-name">{item.name}</span>
-                  <span className="cart-item-price">${item.price}</span>
+                  <span className="cart-item-price"> ${item.price}</span>
                 </div>
                 {cartItems.find((cartItem) => cartItem.id === item.id) ? (
                   <button className="buy" onClick={() => removeFromCart(item)}>
