@@ -36,7 +36,7 @@ function Navbar() {
     <>
       <div className="navbar">
         <NavLink tp="/">
-          <h1 className="">Pre Entrega 1</h1>
+          <h1 className="">Pre Entrega 2</h1>
         </NavLink>
         <ul>
           <li>
