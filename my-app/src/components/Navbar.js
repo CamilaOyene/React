@@ -1,4 +1,5 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import { NavLink, Link, useNavigate } from 'react-router-dom';
 import '../components-css/Navbar.css';
 import React, { useState } from 'react';
 import Tv from './Tv';
@@ -10,7 +11,6 @@ function Navbar() {
   const [celularImages, setCelularImages] = useState([]);
   const navigate = useNavigate();
 
-
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
     setTvImages(false);
@@ -20,38 +20,33 @@ function Navbar() {
   const handleTvClick = () => {
     setTvImages(true);
     setIsDropdownOpen(false);
-    setCelularImages(false)
-
+    setCelularImages(false);
   };
 
-    const handleCelClick = () => {
-      setCelularImages(true);
-          setIsDropdownOpen(false);
-      setTvImages(false);
-
+  const handleCelClick = () => {
+    setCelularImages(true);
+    setIsDropdownOpen(false);
+    setTvImages(false);
   };
-
 
   return (
     <>
       <div className="navbar">
-        <NavLink tp="/">
+        <NavLink to="/">
           <h1 className="">Pre Entrega 2</h1>
         </NavLink>
         <ul>
           <li>
-            <a
-              href="/"
-              onClick={(e) => {
-                e.preventDefault();
+            <Link
+              to="/"
+              onClick={() => {
                 setIsDropdownOpen(false);
                 setTvImages(false);
                 setCelularImages(false);
-                navigate("/");
               }}
             >
               Home
-            </a>
+            </Link>
           </li>
           <li className="dropdown">
             <a href="#" onClick={toggleDropdown}>
