@@ -1,36 +1,18 @@
-/* eslint-disable jsx-a11y/heading-has-content */
 import React, { useState } from "react";
 import "../components-css/Cart.css";
-import celular from "../assets/iphone.jpg";
-import tv from "../assets/tv.jpg";
-import aspiradora from "../assets/aspiradora.jpg";
-import tv2 from "../assets/tv2.jpg";
-import tv3 from "../assets/tv3.jpg";
-import celular2 from "../assets/celular2.png";
-import celular3 from "../assets/celular3.jpg";
-import aspiradora2 from "../assets/aspiradora.2jpg.jpg";
 import laptop1 from "../assets/laptop1.jpg";
 import laptop2 from "../assets/laptop2.jpg";
 import laptop3 from "../assets/laptop3.jpg";
 import laptop4 from "../assets/laptop4.jpg";
 
-
 const products = [
-  { id: 1, name: "IPhone 11", price: 10, image: celular },
-  { id: 2, name: "Tv", price: 15, image: tv },
-  { id: 3, name: "Smart Tv", price: 15, image: tv2 },
-  { id: 4, name: "Aspiradora", price: 20, image: aspiradora },
-  { id: 5, name: "Tv", price: 15, image: tv3 },
-  { id: 6, name: "Samsung Galaxy", price: 15, image: celular2 },
-  { id: 7, name: "Motorola G", price: 15, image: celular3 },
-  { id: 8, name: "Aspiradora Clipart", price: 15, image: aspiradora2 },
-  { id: 9, name: "Laptop HP", price: 800, image: laptop1 },
-  { id: 10, name: "MacBook Pro", price: 1200, image: laptop2 },
-  { id: 11, name: "Dell Inspiron", price: 950, image: laptop3 },
-  { id: 12, name: "Lenovo ThinkPad", price: 1100, image: laptop4 }
+  { id: 1, name: "Laptop HP", price: 800, image: laptop1 },
+  { id: 2, name: "MacBook Pro", price: 1200, image: laptop2 },
+  { id: 3, name: "Dell Inspiron", price: 950, image: laptop3 },
+  { id: 4, name: "Lenovo ThinkPad", price: 1100, image: laptop4 },
 ];
 
-function Home() {
+function Computadora() {
   const [cartItems, setCartItems] = useState([]);
 
   // Agregar un producto al carrito
@@ -50,7 +32,7 @@ function Home() {
 
   return (
     <div className="container mx-auto py-8">
-      <h2 className="cart-heading"></h2>
+      <h2 className="cart-heading">Computadoras</h2>
       {products.length > 0 ? (
         <>
           <ul className="cart-list">
@@ -100,5 +82,4 @@ function Home() {
   );
 }
 
-
-export default Home;
+export default Computadora;

@@ -1,61 +1,71 @@
+/* Navbar.css */
 .navbar {
-    background-color: #333;
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-  }
-  
-  .navbar h1 {
-    margin: 0;
-  }
-  
-  .navbar ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-  }
-  
-  .navbar li {
-    padding: 5px;
-  }
-  
-  .navbar a {
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  .navbar a:hover {
-    text-decoration: underline;
-  }
-
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  
- .dropdown-content {
-  display: none;
-  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: #333;
-  min-width: 160px;
-  z-index: 1;
-  top: 100%; /* Coloca el menú debajo del elemento padre */
-  left: 0; /* Alinea el menú con el lado izquierdo del elemento padre */
+  color: white;
+  padding: 10px 20px;
 }
 
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 16px;
+}
 
-  
-  .dropdown.open .dropdown-content {
-    display: block;
-  }
-  
-  /* Ajusta el estilo de los elementos del menú desplegable */
-  .dropdown-content li {
-    padding: 10px;
-  }
-  
-  .dropdown-content li:hover {
-    background-color: #ddd;
-  }
+.dropdown {
+  position: relative;
+}
+
+.dropdown button {
+  background-color: #333;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  width: 150px;
+}
+
+/* Mostrar el menú desplegable al pasar el mouse */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Estilo para los elementos del menú desplegable */
+.dropdown-content a {
+  color: #333;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+}
+
+/* Estilo para los elementos del menú desplegable al pasar el mouse */
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar li {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar h1 {
+  margin: 0;
+}

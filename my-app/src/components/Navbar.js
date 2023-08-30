@@ -1,32 +1,50 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { NavLink, Link, useNavigate } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import '../components-css/Navbar.css';
 import React, { useState } from 'react';
 import Tv from './Tv';
 import Celular from './Celular';
+import Computadora from './Computadora'; // Importa el componente Computadora
 
 function Navbar() {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(true);
-  const [tvImages, setTvImages] = useState([]);
-  const [celularImages, setCelularImages] = useState([]);
-  const navigate = useNavigate();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Cambiado a false para que el menú no esté abierto inicialmente
+  const [tvImages, setTvImages] = useState(false);
+  const [celularImages, setCelularImages] = useState(false);
+  const [computadoraImages, setComputadoraImages] = useState(false); // Nuevo estado para el componente Computadora
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
     setTvImages(false);
     setCelularImages(false);
+    setComputadoraImages(false); // Asegúrate de restablecer el estado de la Computadora al cerrar el menú
   };
 
   const handleTvClick = () => {
     setTvImages(true);
     setIsDropdownOpen(false);
     setCelularImages(false);
+    setComputadoraImages(false);
   };
 
   const handleCelClick = () => {
     setCelularImages(true);
     setIsDropdownOpen(false);
     setTvImages(false);
+    setComputadoraImages(false);
+  };
+
+  const handleCompClick = () => {
+    setComputadoraImages(true);
+    setIsDropdownOpen(false);
+    setTvImages(false);
+    setCelularImages(false);
+  };
+
+  const handleHomeClick = () => {
+    setIsDropdownOpen(false);
+    setTvImages(false);
+    setCelularImages(false);
+    setComputadoraImages(false);
   };
 
   return (
@@ -37,21 +55,12 @@ function Navbar() {
         </NavLink>
         <ul>
           <li>
-            <Link
-              to="/"
-              onClick={() => {
-                setIsDropdownOpen(false);
-                setTvImages(false);
-                setCelularImages(false);
-              }}
-            >
+            <Link to="/" onClick={handleHomeClick}>
               Home
             </Link>
           </li>
           <li className="dropdown">
-            <a href="#" onClick={toggleDropdown}>
-              Productos
-            </a>
+            <button onClick={toggleDropdown}>Productos</button>
             {isDropdownOpen && (
               <ul className="dropdown-content">
                 <li>
@@ -65,7 +74,9 @@ function Navbar() {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/productos/computadora">Computadora</NavLink>
+                  <NavLink to="/productos/computadora" onClick={handleCompClick}>
+                    Computadora
+                  </NavLink>
                 </li>
               </ul>
             )}
@@ -86,6 +97,12 @@ function Navbar() {
         {celularImages && (
           <div className="celular-images">
             <Celular />
+          </div>
+        )}
+        {/* Renderiza la vista de Computadora solo si se hizo clic en el enlace "Computadora" */}
+        {computadoraImages && (
+          <div className="computadora-images">
+            <Computadora />
           </div>
         )}
       </div>
