@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Cart from './components/Cart';
 import React from 'react';
 import Products from './components/Products';
+import ProductDetail from './components/ProductDetail';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />{" "}
         {/* Ruta diferente para Cart */}
         <Route path="/" element={<Products />} />
+        <Route path="/productos/celular/:productId/detalle" element={<ProductDetail />} />
       </Routes>
     </HashRouter>
   );

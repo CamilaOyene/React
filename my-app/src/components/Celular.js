@@ -51,7 +51,7 @@ function Celulares() {
           <ul className="cart-list">
             {products.map((item) => (
               <li key={item.id} className="cart-item">
-                <NavLink to={`/productos/celular/${item.id}`}>
+               <NavLink to={`/productos/celular/${item.id}`}>
                   <img
                     src={item.image}
                     alt={item.name}
