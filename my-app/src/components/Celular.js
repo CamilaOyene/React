@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { NavLink, useParams } from "react-router-dom";
 import "../components-css/Cart.css";
 import celular from "../assets/iphone.jpg";
 import celular2 from "../assets/celular2.png";
 import celular3 from "../assets/celular3.jpg";
+import ProductDetail from "./ProductDetail";
 
 const products = [
   { id: 1, name: "IPhone 11", price: 10, image: celular },
@@ -13,20 +15,33 @@ const products = [
 function Celulares() {
   const [cartItems, setCartItems] = useState([]);
 
-  // Agregar un producto al carrito
   const addToCart = (product) => {
     setCartItems([...cartItems, product]);
   };
 
-  // Eliminar un producto del carrito
   const removeFromCart = (product) => {
     setCartItems(cartItems.filter((item) => item.id !== product.id));
   };
 
-  // Calcular el total del carrito
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => total + item.price, 0);
   };
+
+  const { productId } = useParams();
+
+  if (productId) {
+    const product = products.find((item) => item.id === parseInt(productId));
+    if (product) {
+      return (
+        <ProductDetail
+          product={product}
+          cartItems={cartItems}
+          addToCart={addToCart}
+          removeFromCart={removeFromCart}
+        />
+      );
+    }
+  }
 
   return (
     <div className="container mx-auto py-8">
@@ -36,7 +51,13 @@ function Celulares() {
           <ul className="cart-list">
             {products.map((item) => (
               <li key={item.id} className="cart-item">
-                <img src={item.image} alt={item.name} />
+                <NavLink to={`/productos/celular/${item.id}`}>
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    style={{ maxWidth: "100%", height: "auto" }}
+                  />
+                </NavLink>
                 <div className="cart-item-details">
                   <span className="cart-item-name">{item.name}</span>
                   <span className="cart-item-price"> ${item.price}</span>
