@@ -27,14 +27,15 @@ function Celulares() {
     return cartItems.reduce((total, item) => total + item.price, 0);
   };
 
-  const { productId } = useParams();
+  const { id } = useParams();
+  console.log("CELULAR", id);
 
-  if (productId) {
-    const product = products.find((item) => item.id === parseInt(productId));
+  if (id) {
+    const product = products.find((item) => item.id === parseInt(id));
     if (product) {
       return (
         <ProductDetail
-          product={product}
+          products={product}
           cartItems={cartItems}
           addToCart={addToCart}
           removeFromCart={removeFromCart}
@@ -51,7 +52,7 @@ function Celulares() {
           <ul className="cart-list">
             {products.map((item) => (
               <li key={item.id} className="cart-item">
-               <NavLink to={`/productos/celular/${item.id}`}>
+                <NavLink to={`/productos/celular/${item.id}`}>
                   <img
                     src={item.image}
                     alt={item.name}
@@ -97,6 +98,13 @@ function Celulares() {
       ) : (
         <p>Tu carrito está vacío</p>
       )}
+      <ProductDetail
+        products={products}
+        cartItems={cartItems}
+        addToCart={addToCart}
+        removeFromCart={removeFromCart}
+        id={id}
+      />
     </div>
   );
 }

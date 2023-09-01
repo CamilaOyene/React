@@ -16,7 +16,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />{" "}
         {/* Ruta diferente para Cart */}
         <Route path="/" element={<Products />} />
-        <Route path="/productos/celular/:productId/detalle" element={<ProductDetail />} />
+        <Route path="/productos/celular/:id" element={<ProductDetail />} />
       </Routes>
     </HashRouter>
   );
