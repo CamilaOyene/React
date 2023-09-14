@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import '../../components-css/Register.css';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
     const [formData, setFormData] = useState({
@@ -6,7 +8,9 @@ function Register() {
       email: '',
       password: '',
     });
-  
+    
+    const navigate = useNavigate();
+
     const handleChange = (e) => {
       const { name, value } = e.target;
       setFormData({
@@ -18,6 +22,7 @@ function Register() {
     const handleSubmit = (e) => {
       e.preventDefault();
       // Aquí puedes enviar los datos del formulario a tu servidor o realizar cualquier otra acción que desees.
+      window.alert("registro exitoso")
       console.log(formData);
     };
 
