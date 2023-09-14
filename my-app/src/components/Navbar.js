@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import Tv from './Tv';
 import Celular from './Celular';
 import Computadora from './Computadora'; // Importa el componente Computadora
+import Register from './Auth/Register';
 
 function Navbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Cambiado a false para que el menú no esté abierto inicialmente
@@ -106,8 +107,10 @@ function Navbar() {
           </div>
         )}
       </div>
+      <NavLink to="/register"><button> Register </button> </NavLink>
     </>
   );
 }
+
 
 export default Navbar;
