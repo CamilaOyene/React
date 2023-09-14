@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
 import '../components-css/Navbar.css';
 import React, { useState } from 'react';
 import Tv from './Tv';
@@ -7,12 +7,16 @@ import Celular from './Celular';
 import Computadora from './Computadora'; // Importa el componente Computadora
 import Register from './Auth/Register';
 import Login from './Auth/Login';
+import { signOut } from "firebase/auth";
+import { auth } from './firebase/config';
 
 function Navbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Cambiado a false para que el menú no esté abierto inicialmente
   const [tvImages, setTvImages] = useState(false);
   const [celularImages, setCelularImages] = useState(false);
   const [computadoraImages, setComputadoraImages] = useState(false); // Nuevo estado para el componente Computadora
+  
+ const navigate = useNavigate();
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -47,6 +51,15 @@ function Navbar() {
     setTvImages(false);
     setCelularImages(false);
     setComputadoraImages(false);
+  };
+
+  const Logout = () => {
+    signOut(auth).then(() => {
+    window.alert("sesion cerrada")
+    navigate("/")
+    }).catch((error) => {
+    });
+    
   };
 
   return (
@@ -110,6 +123,7 @@ function Navbar() {
       </div>
       <NavLink to="/register"><button> Register </button> </NavLink>
       <NavLink to="/login"><button> Login </button> </NavLink>
+      <button onClick={Logout}> Log Out </button> 
     </>
   );
 }

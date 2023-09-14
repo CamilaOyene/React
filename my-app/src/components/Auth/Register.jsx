@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import '../../components-css/Register.css';
 import { useNavigate } from 'react-router-dom';
+import {createUserWithEmailAndPassword} from 'firebase/auth'
+import { auth } from '../firebase/config';
+
 
 function Register() {
     const [formData, setFormData] = useState({
@@ -21,7 +24,18 @@ function Register() {
   
     const handleSubmit = (e) => {
       e.preventDefault();
-      // Aquí puedes enviar los datos del formulario a tu servidor o realizar cualquier otra acción que desees.
+      createUserWithEmailAndPassword(auth, formData.email, formData.password)
+      .then((userCredential) => {
+  
+    const user = userCredential.user;
+    console.log(user);
+    navigate('/login');
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+  });
       window.alert("registro exitoso")
       console.log(formData);
     };

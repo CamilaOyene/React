@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../components-css/Login.css';           
+import { auth } from '../firebase/config';
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 function Login() {
-    const history = useNavigate();
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
       email: '',
       password: '',
@@ -19,13 +21,17 @@ function Login() {
   
     const handleSubmit = (e) => {
       e.preventDefault();
-      // Aquí puedes realizar la lógica de inicio de sesión, por ejemplo, verificar credenciales en el servidor.
-      
-      // Simulamos un inicio de sesión exitoso después de 2 segundos.
-      setTimeout(() => {
-        // Redirige al usuario a la página de inicio después del inicio de sesión exitoso.
-        history('/');
-      }, 2000);
+      signInWithEmailAndPassword(auth, formData.email, formData.password)
+      .then((userCredential) => {
+      const user = userCredential.user;
+      window.alert("Inicio de sesion exitoso")
+      navigate("/")
+      }) 
+
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
     };
   
     return (
