@@ -22,7 +22,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         {/* Ruta diferente para Cart */}
         <Route path="/products" element={<Products />} />
-        <Route path="/productos/celular/:id" element={<ProductDetail />} />
+        <Route path="/productos/:id" element={<ProductDetail />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/reset" element={<ResetPassword />} />

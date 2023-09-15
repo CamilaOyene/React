@@ -5,6 +5,7 @@ import { collection, query, onSnapshot, orderBy } from "firebase/firestore";
 import { db } from "./firebase/config";
 import {useDispatch} from 'react-redux'
 import { STORE_PRODUCTS } from "./redux/slices/productSlice";
+import { NavLink } from "react-router-dom";
 
 function Products() {
   const [cartItems, setCartItems] = useState([]);
@@ -84,11 +85,13 @@ const removeFromCart = (product) => {
           <ul className="cart-list">
             {products1?.map((item) => (
               <li key={item.id} className="cart-item">
-                <img src={item.imagenURL} alt={item.imagenURL} />
-                <div className="cart-item-details">
-                  <span className="cart-item-name">{item.nombre}</span>
-                  <span className="cart-item-price"> ${item.precio}</span>
-                </div>
+                <NavLink to={`/productos/${item.id}`}>
+                  <img src={item.imagenURL} alt={item.imagenURL} />
+                  <div className="cart-item-details">
+                    <span className="cart-item-name">{item.nombre}</span>
+                    <span className="cart-item-price"> ${item.precio}</span>
+                  </div>
+                </NavLink>
                 <button className="buy" onClick={() => addToCart(item)}>
                   +
                 </button>
@@ -129,7 +132,7 @@ const removeFromCart = (product) => {
           </div>
         </>
       ) : (
-        <p >No hay productos , debe registrarse o loguear para poder ver los productos</p>
+        <p>No hay productos</p>
       )}
     </div>
   );
