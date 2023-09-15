@@ -31,7 +31,7 @@
   display: none;
   position: absolute;
   background-color: #f9f9f9;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   width: 150px;
 }
@@ -68,4 +68,21 @@
 
 .navbar h1 {
   margin: 0;
+}
+
+/* Estilos para los botones */
+.nav-button {
+  background-color: #333;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px 20px; /* Añadimos un poco de relleno para que coincida con el estilo del navbar */
+  margin: 0 10px; /* Margen similar al de los enlaces del navbar */
+  text-decoration: none; /* Quitamos el subrayado de los botones */
+}
+
+/* Estilo para los botones al pasar el mouse */
+.nav-button:hover {
+  background-color: #555; /* Cambiamos el color de fondo al pasar el mouse */
 }

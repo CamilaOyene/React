@@ -4,33 +4,30 @@ import '../components-css/Navbar.css';
 import React, { useEffect, useState } from 'react';
 import Tv from './Tv';
 import Celular from './Celular';
-import Computadora from './Computadora'; // Importa el componente Computadora
+import Computadora from './Computadora'; 
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from './firebase/config';
 import { AiOutlineUser } from "react-icons/ai";
 import { useDispatch } from 'react-redux';
 import { REMOVE_ACTIVE_USER, SET_ACTIVE_USER } from './redux/slices/authSlice';
-import ShowOnLogin, { ShowOnLogout } from './HiddenLinks';
-
-
+import ShowOnLogin from './HiddenLinks';
 
 function Navbar() {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Cambiado a false para que el menú no esté abierto inicialmente
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); 
   const [tvImages, setTvImages] = useState(false);
   const [celularImages, setCelularImages] = useState(false);
-  const [computadoraImages, setComputadoraImages] = useState(false); // Nuevo estado para el componente Computadora
+  const [computadoraImages, setComputadoraImages] = useState(false); 
   const [displayName, setDisplayName] = useState('');
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-
   const toggleDropdown = () => {
-    navigate("/products")
+    navigate("/products");
     setIsDropdownOpen(!isDropdownOpen);
     setTvImages(false);
     setCelularImages(false);
-    setComputadoraImages(false); // Asegúrate de restablecer el estado de la Computadora al cerrar el menú
+    setComputadoraImages(false); 
   };
 
   const handleTvClick = () => {
@@ -63,16 +60,16 @@ function Navbar() {
 
   const Logout = () => {
     signOut(auth).then(() => {
-    window.alert("sesion cerrada")
-    navigate("/")
+      window.alert("Sesión cerrada");
+      navigate("/");
     }).catch((error) => {
+      console.error("Error al cerrar sesión:", error);
     });
   };
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        const uid = user.uid;
         const slice = user.email.slice(0, 4)
         setDisplayName(slice);
         dispatch(SET_ACTIVE_USER(
@@ -85,27 +82,35 @@ function Navbar() {
 
       } else {
         setDisplayName("");
-            dispatch(
-              REMOVE_ACTIVE_USER({
-                email: null,
-                userName: null,
-                userID: null,
-              })
-            );
+        dispatch(
+          REMOVE_ACTIVE_USER({
+            email: null,
+            userName: null,
+            userID: null,
+          })
+        );
       }
     });
-  }, [dispatch,displayName]);
+  }, [dispatch, displayName]);
+
+  const addProducts = () => {
+    setIsDropdownOpen(false);
+    setTvImages(false);
+    setComputadoraImages(false);
+    setCelularImages(false);
+    navigate("/addProd");
+}
 
   return (
     <>
       <div className="navbar">
         <NavLink to="/">
-          <h1 className="">Pre Entrega 2</h1>
+          <h1 className="">Proyecto Final</h1>
         </NavLink>
         <ul>
           <li>
             <Link to="/" onClick={handleHomeClick}>
-              Home
+            <button className="nav-button">Home</button>
             </Link>
           </li>
           <li className="dropdown">
@@ -134,7 +139,38 @@ function Navbar() {
             )}
           </li>
           <li>
-            <NavLink to="/cart">Carrito</NavLink>
+            <NavLink to="/cart">
+            <button className="nav-button">Carrito</button>
+            </NavLink>
+          </li>
+         
+          <li>
+            <NavLink to="/register">
+             <button className="nav-button">Register</button>
+            </NavLink>
+          </li>
+          <li>
+           <NavLink to="/login">
+            <button className="nav-button">Login</button>
+           </NavLink>
+          </li>
+          <ShowOnLogin>
+           <li>
+           <button className="nav-button" onClick={Logout}>
+             Log Out
+            </button>
+           </li>
+          </ShowOnLogin>
+          <ShowOnLogin>
+            <li>
+              <a href="#">
+                <AiOutlineUser />
+                Hola, {displayName}
+              </a>
+            </li>
+          </ShowOnLogin>
+          <li>
+          <button onClick={addProducts}>Agregar Productos</button>
           </li>
         </ul>
       </div>
@@ -158,27 +194,14 @@ function Navbar() {
           </div>
         )}
       </div>
-      <NavLink to="/register">
-        <button> Register </button>{" "}
-      </NavLink>
-      <NavLink to="/login">
-        <button> Login </button>{" "}
-      </NavLink>
-      <ShowOnLogin>
-        <button onClick={Logout}> Log Out </button>
-      </ShowOnLogin>
-      <ShowOnLogin>
-        <a href="#">
-          <AiOutlineUser />
-          Hola, {displayName}
-        </a>
-      </ShowOnLogin>
-      <NavLink to="/addProd">
-        <button>Agregar Productos</button>
-      </NavLink>
     </>
   );
 }
 
-
 export default Navbar;
+
+
+
+
+
+

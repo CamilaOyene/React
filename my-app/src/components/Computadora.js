@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/heading-has-content */
 import React, { useEffect, useState } from "react";
 import "../components-css/Cart.css";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
@@ -54,6 +55,7 @@ function Computadora() {
 
   useEffect(() => {
     getProducts();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getProducts = () => {
@@ -132,7 +134,7 @@ function Computadora() {
           </div>
         </>
       ) : (
-        <p>No hay productos</p>
+        <p>No hay productos , debe registrarse o loguear para poder ver los productos</p>
       )}
     </div>
   );

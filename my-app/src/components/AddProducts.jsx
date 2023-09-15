@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import { TfiArrowCircleLeft } from "react-icons/tfi";
 import { auth, db, storage } from "./firebase/config";
 
+
 const initialState = {
   name: "",
   imagenURL: "",

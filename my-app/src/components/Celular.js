@@ -1,5 +1,6 @@
+/* eslint-disable jsx-a11y/heading-has-content */
 import React, { useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import "../components-css/Cart.css";
 import ProductDetail from "./ProductDetail";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
@@ -14,6 +15,7 @@ function Celulares() {
 
   useEffect(() => {
     getProducts();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getProducts = () => {
@@ -146,16 +148,9 @@ function Celulares() {
           </div>
         </>
       ) : (
-        <p>No hay productos</p>
+        <p>No hay productos , debe registrarse o loguear para poder ver los productos</p>
       )}
-      <ProductDetail
-        products={products1}
-        cartItems={cartItems}
-        addToCart={addToCart}
-        removeFromCart={removeFromCart}
-        id={id}
-      />
-    </div>
+   </div>  
   );
 }
 

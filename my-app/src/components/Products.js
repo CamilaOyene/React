@@ -13,6 +13,7 @@ function Products() {
 
   useEffect(() => {
     getProducts()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getProducts = () => {
@@ -128,7 +129,7 @@ const removeFromCart = (product) => {
           </div>
         </>
       ) : (
-        <p>No hay productos</p>
+        <p >No hay productos , debe registrarse o loguear para poder ver los productos</p>
       )}
     </div>
   );

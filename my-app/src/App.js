@@ -10,6 +10,7 @@ import Register from './components/Auth/Register';
 import Login from './components/Auth/Login';
 import ResetPassword from './components/Auth/ResetPassword';
 import AddProducts from './components/AddProducts'
+import Footer from './components/Footer';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path="/reset" element={<ResetPassword />} />
         <Route path="/addProd" element={<AddProducts />} />
       </Routes>
+      <Footer/>
     </HashRouter>
   );
 }

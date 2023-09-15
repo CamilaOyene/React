@@ -1,0 +1,35 @@
+/* Footer.css */
+.footer {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+  
+  .footer-logo {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .social-icons a {
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+  }
+  
+  /* Estilo para los íconos de redes sociales cuando se les hace hover */
+  .social-icons a:hover {
+    color: #007bff;
+  }

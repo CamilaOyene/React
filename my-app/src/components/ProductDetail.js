@@ -5,7 +5,7 @@ import "../components-css/ProductDetail.css";
 function ProductDetail({ products, cartItems, addToCart, removeFromCart }) {
   const { id } = useParams();
   const productId = parseInt(id);
-  console.log(productId);
+  
 
  const [product, setProduct] = useState(null);
  const [isAddedToCart, setIsAddedToCart] = useState(false);
@@ -19,7 +19,7 @@ function ProductDetail({ products, cartItems, addToCart, removeFromCart }) {
     );
     setIsAddedToCart(isProductInCart);
      console.log("FOUND PRODUCT", foundProduct);
-  }, [id, products, cartItems]);
+  }, [id, products, cartItems, productId]);
 
 
   const toggleCart = () => {
