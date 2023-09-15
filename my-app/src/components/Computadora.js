@@ -1,55 +1,111 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../components-css/Cart.css";
-import laptop1 from "../assets/laptop1.jpg";
-import laptop2 from "../assets/laptop2.jpg";
-import laptop3 from "../assets/laptop3.jpg";
-import laptop4 from "../assets/laptop4.jpg";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { db } from "./firebase/config";
+import { STORE_PRODUCTS } from "./redux/slices/productSlice";
+import { useDispatch } from "react-redux";
 
-const products = [
-  { id: 1, name: "Laptop HP", price: 800, image: laptop1 },
-  { id: 2, name: "MacBook Pro", price: 1200, image: laptop2 },
-  { id: 3, name: "Dell Inspiron", price: 950, image: laptop3 },
-  { id: 4, name: "Lenovo ThinkPad", price: 1100, image: laptop4 },
-];
 
 function Computadora() {
   const [cartItems, setCartItems] = useState([]);
 
   // Agregar un producto al carrito
   const addToCart = (product) => {
-    setCartItems([...cartItems, product]);
+    const index = cartItems.findIndex((item) => item.id === product.id);
+
+    if (index !== -1) {
+      // El producto ya está en el carrito, aumenta la cantidad
+      const updatedCart = [...cartItems];
+      updatedCart[index].quantity += 1;
+      setCartItems(updatedCart);
+    } else {
+      // El producto no está en el carrito, agrégalo con cantidad 1
+      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+    }
   };
 
-  // Eliminar un producto del carrito
   const removeFromCart = (product) => {
-    setCartItems(cartItems.filter((item) => item.id !== product.id));
+    const index = cartItems.findIndex((item) => item.id === product.id);
+
+    if (index !== -1) {
+      if (cartItems[index].quantity > 1) {
+        // Hay más de un producto en el carrito, disminuye la cantidad
+        const updatedCart = [...cartItems];
+        updatedCart[index].quantity -= 1;
+        setCartItems(updatedCart);
+      } else {
+        // Solo hay un producto en el carrito, elimínalo
+        const updatedCart = cartItems.filter((item) => item.id !== product.id);
+        setCartItems(updatedCart);
+      }
+    }
   };
 
   // Calcular el total del carrito
   const calculateTotal = () => {
-    return cartItems.reduce((total, item) => total + item.price, 0);
+    return cartItems.reduce(
+      (total, item) => total + item.precio * item.quantity,
+      0
+    );
+  };
+
+  const [products1, setProducts1] = useState([]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  const getProducts = () => {
+    try {
+      const productsRef = collection(db, "Productos");
+      const q = query(productsRef, orderBy("createdAt", "desc"));
+      onSnapshot(q, (snapshot) => {
+        const allProducts = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        const filteredProducts = allProducts.filter(
+          (product) => product.descripcion === "pc"
+        );
+
+        setProducts1(filteredProducts);
+        dispatch(
+          STORE_PRODUCTS({
+            products: allProducts,
+          })
+        );
+      });
+    } catch (error) {}
   };
 
   return (
     <div className="container mx-auto py-8">
-      <h2 className="cart-heading">Computadoras</h2>
-      {products.length > 0 ? (
+      <h2 className="cart-heading"></h2>
+      {products1?.length > 0 ? (
         <>
           <ul className="cart-list">
-            {products.map((item) => (
+            {products1?.map((item) => (
               <li key={item.id} className="cart-item">
-                <img src={item.image} alt={item.name} />
+                <img src={item.imagenURL} alt={item.imagenURL} />
                 <div className="cart-item-details">
-                  <span className="cart-item-name">{item.name}</span>
-                  <span className="cart-item-price"> ${item.price}</span>
+                  <span className="cart-item-name">{item.nombre}</span>
+                  <span className="cart-item-price"> ${item.precio}</span>
                 </div>
-                {cartItems.find((cartItem) => cartItem.id === item.id) ? (
+                <button className="buy" onClick={() => addToCart(item)}>
+                  +
+                </button>
+                {cartItems?.find((cartItem) => cartItem.id === item.id) && (
+                  <span>
+                    {
+                      cartItems.find((cartItem) => cartItem.id === item.id)
+                        .quantity
+                    }
+                  </span>
+                )}
+                {cartItems?.find((cartItem) => cartItem.id === item.id) && (
                   <button className="buy" onClick={() => removeFromCart(item)}>
                     -
-                  </button>
-                ) : (
-                  <button className="buy" onClick={() => addToCart(item)}>
-                    +
                   </button>
                 )}
               </li>
@@ -76,7 +132,7 @@ function Computadora() {
           </div>
         </>
       ) : (
-        <p>Tu carrito está vacío</p>
+        <p>No hay productos</p>
       )}
     </div>
   );

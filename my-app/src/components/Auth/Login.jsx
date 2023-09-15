@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import '../../components-css/Login.css';           
 import { auth } from '../firebase/config';
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -62,6 +62,11 @@ function Login() {
           </div>
           <button type="submit">Iniciar Sesión</button>
         </form>
+        <div>
+          <NavLink to= "/reset">
+            <h2>Olvidaste tu contraseña?</h2>
+          </NavLink>
+        </div>
       </div>
     );
   }

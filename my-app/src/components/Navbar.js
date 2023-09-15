@@ -1,24 +1,32 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import '../components-css/Navbar.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Tv from './Tv';
 import Celular from './Celular';
 import Computadora from './Computadora'; // Importa el componente Computadora
-import Register from './Auth/Register';
-import Login from './Auth/Login';
-import { signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from './firebase/config';
+import { AiOutlineUser } from "react-icons/ai";
+import { useDispatch } from 'react-redux';
+import { REMOVE_ACTIVE_USER, SET_ACTIVE_USER } from './redux/slices/authSlice';
+import ShowOnLogin, { ShowOnLogout } from './HiddenLinks';
+
+
 
 function Navbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Cambiado a false para que el menú no esté abierto inicialmente
   const [tvImages, setTvImages] = useState(false);
   const [celularImages, setCelularImages] = useState(false);
   const [computadoraImages, setComputadoraImages] = useState(false); // Nuevo estado para el componente Computadora
-  
- const navigate = useNavigate();
+  const [displayName, setDisplayName] = useState('');
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
 
   const toggleDropdown = () => {
+    navigate("/products")
     setIsDropdownOpen(!isDropdownOpen);
     setTvImages(false);
     setCelularImages(false);
@@ -59,8 +67,34 @@ function Navbar() {
     navigate("/")
     }).catch((error) => {
     });
-    
   };
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        const slice = user.email.slice(0, 4)
+        setDisplayName(slice);
+        dispatch(SET_ACTIVE_USER(
+          {
+            email: user.email,
+            userName: user.displayName,
+            userID: user.uid
+          }
+        ))
+
+      } else {
+        setDisplayName("");
+            dispatch(
+              REMOVE_ACTIVE_USER({
+                email: null,
+                userName: null,
+                userID: null,
+              })
+            );
+      }
+    });
+  }, [dispatch,displayName]);
 
   return (
     <>
@@ -89,7 +123,10 @@ function Navbar() {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/productos/computadora" onClick={handleCompClick}>
+                  <NavLink
+                    to="/productos/computadora"
+                    onClick={handleCompClick}
+                  >
                     Computadora
                   </NavLink>
                 </li>
@@ -121,9 +158,24 @@ function Navbar() {
           </div>
         )}
       </div>
-      <NavLink to="/register"><button> Register </button> </NavLink>
-      <NavLink to="/login"><button> Login </button> </NavLink>
-      <button onClick={Logout}> Log Out </button> 
+      <NavLink to="/register">
+        <button> Register </button>{" "}
+      </NavLink>
+      <NavLink to="/login">
+        <button> Login </button>{" "}
+      </NavLink>
+      <ShowOnLogin>
+        <button onClick={Logout}> Log Out </button>
+      </ShowOnLogin>
+      <ShowOnLogin>
+        <a href="#">
+          <AiOutlineUser />
+          Hola, {displayName}
+        </a>
+      </ShowOnLogin>
+      <NavLink to="/addProd">
+        <button>Agregar Productos</button>
+      </NavLink>
     </>
   );
 }

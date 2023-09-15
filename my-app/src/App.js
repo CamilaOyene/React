@@ -8,6 +8,9 @@ import Products from './components/Products';
 import ProductDetail from './components/ProductDetail';
 import Register from './components/Auth/Register';
 import Login from './components/Auth/Login';
+import ResetPassword from './components/Auth/ResetPassword';
+import AddProducts from './components/AddProducts'
+
 
 function App() {
   return (
@@ -17,10 +20,12 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
         {/* Ruta diferente para Cart */}
-        <Route path="/" element={<Products />} />
+        <Route path="/products" element={<Products />} />
         <Route path="/productos/celular/:id" element={<ProductDetail />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/reset" element={<ResetPassword />} />
+        <Route path="/addProd" element={<AddProducts />} />
       </Routes>
     </HashRouter>
   );
