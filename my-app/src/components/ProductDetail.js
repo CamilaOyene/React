@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom"; // Importa Link desde React Router
+import { useParams } from "react-router-dom"; // Importa Link desde React Router
 import "../components-css/ProductDetail.css";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "./firebase/config";
@@ -9,7 +9,7 @@ function ProductDetail({ products, cartItems, addToCart, removeFromCart }) {
   const productId = parseInt(id);
 
   const [product, setProduct] = useState(null);
-  const [isAddedToCart, setIsAddedToCart] = useState(false);
+  const [ setIsAddedToCart ] = useState(false);
 
   useEffect(() => {
     const foundProduct = products?.find((product) => product.id === productId);
@@ -18,17 +18,9 @@ function ProductDetail({ products, cartItems, addToCart, removeFromCart }) {
     const isProductInCart = cartItems?.some(
       (item) => item.id === foundProduct?.id
     );
-    setIsAddedToCart(isProductInCart);
-  }, [id, products, cartItems]);
+   
+  }, [id, products, cartItems, productId, setIsAddedToCart]);
 
-  const toggleCart = () => {
-    if (isAddedToCart) {
-      removeFromCart(product);
-    } else {
-      addToCart(product);
-    }
-    setIsAddedToCart(!isAddedToCart);
-  };
 
 
   useEffect(() => {

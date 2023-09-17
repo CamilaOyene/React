@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import '../../components-css/Register.css';
 import { useNavigate } from 'react-router-dom';
@@ -32,6 +33,7 @@ function Register() {
     navigate('/login');
   })
   .catch((error) => {
+    // eslint-disable-next-line no-unused-vars
     const errorCode = error.code;
     const errorMessage = error.message;
     // ..
