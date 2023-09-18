@@ -1,70 +1,69 @@
-# Getting Started with Create React App
+1) Nombre : Proyecto Final.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+2) Breve descripción de mi proyecto final.
 
-## Available Scripts
+.Estructura del Proyecto :
 
-In the project directory, you can run:
+App.js: Este archivo contiene la configuración de las rutas de la aplicación.
+Componentes
 
-### `npm start`
+AddProducts.jsx: Componente encargado de agregar productos.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Cart.js: Componente que muestra el carrito de compras.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+CartItem.js: Componente que representa un ítem en el carrito.
 
-### `npm test`
+Celular.js: Componente para la visualización de productos de tipo "Celular".
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Footer.jsx: Componente del pie de página de la aplicación.
 
-### `npm run build`
+HiddenLinks.js: Componente que contiene enlaces ocultos.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Home.js: Componente de la página de inicio.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Navbar.js: Componente de la barra de navegación.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+ProductDetail.js: Componente que muestra los detalles de un producto.
 
-### `npm run eject`
+Products.js: Componente para mostrar una lista de productos.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Tv.js: Componente para la visualización de productos de tipo "TV".
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3) Redux
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+store.js: Configuración del store de Redux.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+authSlice.js: Slice de Redux para la gestión de la autenticación.
 
-## Learn More
+productSlice.js: Slice de Redux para la gestión de productos.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+4) Firebase
+config.js: Configuración de Firebase para la aplicación.
 
-### Code Splitting
+5) Autenticación
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+ResetPassword.jsx: Componente para restablecer la contraseña.
 
-### Analyzing the Bundle Size
+Register.jsx: Componente para el registro de usuarios.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Login.jsx: Componente para el inicio de sesión de usuarios.
 
-### Making a Progressive Web App
+6) Pasos a seguir : 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Clona este repositorio en tu máquina local:
 
-### Advanced Configuration
+git clone https://github.com/cuellogabriel/React.git
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Navega al directorio de tu proyecto:
+cd React/my-app
 
-### Deployment
+Instala las dependencias del proyecto:
+npm install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Configura Firebase:
 
-### `npm run build` fails to minify
+npm start
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
