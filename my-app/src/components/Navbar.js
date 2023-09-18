@@ -11,6 +11,7 @@ import { AiOutlineUser } from "react-icons/ai";
 import { useDispatch } from 'react-redux';
 import { REMOVE_ACTIVE_USER, SET_ACTIVE_USER } from './redux/slices/authSlice';
 import ShowOnLogin from './HiddenLinks';
+import Search from './Search';
 
 function Navbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); 
@@ -84,6 +85,12 @@ function Navbar() {
       setComputadoraImages(false);
       navigate("/login")
     };
+
+    const handleSearch = (searchTerm) => {
+      // Aquí puedes implementar la lógica de búsqueda
+      console.log(`Buscando productos con el término: ${searchTerm}`);
+      // Puedes navegar a una página de resultados de búsqueda o realizar una búsqueda en la base de datos aquí.
+    };
   
   const Logout = () => {
     signOut(auth).then(() => {
@@ -134,6 +141,8 @@ function Navbar() {
         <NavLink to="/">
           <h1 className="">Proyecto Final</h1>
         </NavLink>
+         {/* Agrega el componente Search */}
+         <Search onSearch={handleSearch} />
         <ul>
           <li>
             <a onClick={handleHomeClick}>
