@@ -6,20 +6,12 @@ import { db } from "./firebase/config";
 
 function ProductDetail({ products, cartItems, addToCart, removeFromCart }) {
   const { id } = useParams();
-  const productId = parseInt(id);
+
 
   const [product, setProduct] = useState(null);
-  const [ setIsAddedToCart ] = useState(false);
 
-  useEffect(() => {
-    const foundProduct = products?.find((product) => product.id === productId);
-    setProduct(foundProduct);
 
-    const isProductInCart = cartItems?.some(
-      (item) => item.id === foundProduct?.id
-    );
-   
-  }, [id, products, cartItems, productId, setIsAddedToCart]);
+
 
 
 
