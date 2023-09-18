@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { NavLink, Link, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import '../components-css/Navbar.css';
 import React, { useEffect, useState } from 'react';
 import Tv from './Tv';
@@ -23,7 +23,6 @@ function Navbar() {
   const dispatch = useDispatch();
 
   const toggleDropdown = () => {
-    navigate("/products");
     setIsDropdownOpen(!isDropdownOpen);
     setTvImages(false);
     setCelularImages(false);
@@ -35,6 +34,7 @@ function Navbar() {
     setIsDropdownOpen(false);
     setCelularImages(false);
     setComputadoraImages(false);
+    navigate("/productos/television")
   };
 
   const handleCelClick = () => {
@@ -42,6 +42,7 @@ function Navbar() {
     setIsDropdownOpen(false);
     setTvImages(false);
     setComputadoraImages(false);
+    navigate("/productos/celular")
   };
 
   const handleCompClick = () => {
@@ -49,6 +50,7 @@ function Navbar() {
     setIsDropdownOpen(false);
     setTvImages(false);
     setCelularImages(false);
+    navigate("/productos/computadora");
   };
 
   const handleHomeClick = () => {
@@ -56,8 +58,33 @@ function Navbar() {
     setTvImages(false);
     setCelularImages(false);
     setComputadoraImages(false);
+    navigate("/");
   };
 
+    const handleCarrito = () => {
+      setIsDropdownOpen(false);
+      setTvImages(false);
+      setCelularImages(false);
+      setComputadoraImages(false);
+      navigate("/cart");
+  };
+  
+     const handleRegister = () => {
+       setIsDropdownOpen(false);
+       setTvImages(false);
+       setCelularImages(false);
+       setComputadoraImages(false);
+       navigate("/register");
+  };
+
+    const handleLogin = () => {
+      setIsDropdownOpen(false);
+      setTvImages(false);
+      setCelularImages(false);
+      setComputadoraImages(false);
+      navigate("/login")
+    };
+  
   const Logout = () => {
     signOut(auth).then(() => {
       window.alert("Sesión cerrada");
@@ -109,57 +136,66 @@ function Navbar() {
         </NavLink>
         <ul>
           <li>
-            <Link to="/" onClick={handleHomeClick}>
-            <button className="nav-button">Home</button>
-            </Link>
+            <a onClick={handleHomeClick}>
+              <button className="nav-button">Home</button>
+            </a>
           </li>
-          <li className="dropdown">
-            <button onClick={toggleDropdown}>Productos</button>
+          <li
+            className="dropdown"
+            onMouseEnter={toggleDropdown}
+            onMouseLeave={toggleDropdown}
+          >
+            <button>Productos</button>
             {isDropdownOpen && (
               <ul className="dropdown-content">
                 <li>
-                  <NavLink to="/productos/celular" onClick={handleCelClick}>
+                  <a onClick={handleCelClick}>
                     Celular
-                  </NavLink>
+                  </a>
                 </li>
                 <li>
-                  <NavLink to="/productos/television" onClick={handleTvClick}>
+                  <a  onClick={handleTvClick}>
                     Televisión
-                  </NavLink>
+                  </a>
                 </li>
                 <li>
-                  <NavLink
-                    to="/productos/computadora"
+                  <a
                     onClick={handleCompClick}
                   >
                     Computadora
-                  </NavLink>
+                  </a>
                 </li>
               </ul>
             )}
           </li>
           <li>
-            <NavLink to="/cart">
-            <button className="nav-button">Carrito</button>
-            </NavLink>
+            <a>
+              <button className="nav-button" onClick={handleCarrito}>
+                Carrito
+              </button>
+            </a>
           </li>
-         
+
           <li>
-            <NavLink to="/register">
-             <button className="nav-button">Register</button>
-            </NavLink>
+            <a>
+              <button className="nav-button" onClick={handleRegister}>
+                Register
+              </button>
+            </a>
           </li>
           <li>
-           <NavLink to="/login">
-            <button className="nav-button">Login</button>
-           </NavLink>
+            <a >
+              <button className="nav-button" onClick={handleLogin}>
+                Login
+              </button>
+            </a>
           </li>
           <ShowOnLogin>
-           <li>
-           <button className="nav-button" onClick={Logout}>
-             Log Out
-            </button>
-           </li>
+            <li>
+              <button className="nav-button" onClick={Logout}>
+                Log Out
+              </button>
+            </li>
           </ShowOnLogin>
           <ShowOnLogin>
             <li>
@@ -170,7 +206,7 @@ function Navbar() {
             </li>
           </ShowOnLogin>
           <li>
-          <button onClick={addProducts}>Agregar Productos</button>
+            <button onClick={addProducts}>Agregar Productos</button>
           </li>
         </ul>
       </div>

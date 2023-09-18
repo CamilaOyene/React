@@ -5,7 +5,7 @@ import productSlice from "./slices/productSlice";
 const store = configureStore({
   reducer: {
     auth: authSlice,
-    products: productSlice
+    products: productSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -1,17 +1,13 @@
-import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import React, { useState, ChangeEvent } from "react";
+import {getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import React, { useState } from "react";
 import {
   Timestamp,
   addDoc,
-  collection,
-  doc,
-  getDoc,
-  updateDoc,
+  collection
 } from "firebase/firestore";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { TfiArrowCircleLeft } from "react-icons/tfi";
-import { auth, db, storage } from "./firebase/config";
+import { db, storage } from "./firebase/config";
 
 
 const initialState = {
@@ -21,17 +17,14 @@ const initialState = {
 };
 
 const AddProducts = () => {
-  const { id } = useParams();
   const [products, setProducts] = useState({ ...initialState });
   const [uploadProgress, setUploadProgress] = useState(0);
-  const navigate = useNavigate();
-
-;
 
   const agregarProd = (e) => {
     e.preventDefault();
 
     try {
+      // eslint-disable-next-line
       const docRef = addDoc(collection(db, "Productos"), {
         nombre: products.name,
         imagenURL: products.imagenURL,
@@ -42,7 +35,7 @@ const AddProducts = () => {
       setProducts({ ...initialState });
       window.alert("Excelente datos subidos satisfactoriamente!");
     } catch (error) {
- window.alert("Error")
+ window.alert(error)
     }
   };
 
@@ -72,10 +65,6 @@ const AddProducts = () => {
         );
       }
     };
-
-  const user = auth.currentUser;
-  const userId = user ? user.uid : "";
-  console.log(products);
 
   return (
     <body className="flex flex-col items-center justify-center bg-[#111523] antialiased min-h-screen">

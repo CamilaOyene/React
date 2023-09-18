@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../components-css/Login.css";
 import { auth } from "../firebase/config";
-import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
+import { sendPasswordResetEmail } from "firebase/auth";
 
 function ResetPassword() {
   const navigate = useNavigate();
@@ -31,6 +31,7 @@ function ResetPassword() {
          .catch((error) => {
            const errorCode = error.code;
            const errorMessage = error.message;
+           window.alert(errorCode, errorMessage);
          });
   };
 

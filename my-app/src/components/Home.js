@@ -35,6 +35,7 @@ function Home() {
       
     }
   }
+  
 
   // Agregar un producto al carrito
 const addToCart = (product) => {
@@ -49,7 +50,8 @@ const addToCart = (product) => {
     // El producto no está en el carrito, agrégalo con cantidad 1
     setCartItems([...cartItems, { ...product, quantity: 1 }]);
   }
-};
+  };
+  
 
 const removeFromCart = (product) => {
   const index = cartItems.findIndex((item) => item.id === product.id);
@@ -132,7 +134,10 @@ const removeFromCart = (product) => {
           </div>
         </>
       ) : (
-        <p>No hay productos</p>
+        <p>
+          No se encuentran artículos disponibles. Por favor,
+          inicia sesión o regístrate.
+        </p>
       )}
     </div>
   );

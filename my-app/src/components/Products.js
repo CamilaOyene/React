@@ -132,7 +132,11 @@ const removeFromCart = (product) => {
           </div>
         </>
       ) : (
-        <p>No hay productos</p>
+        <p>
+          {" "}
+          No se encuentran artículos disponibles. Por favor, inicia sesión o
+          regístrate.
+        </p>
       )}
     </div>
   );

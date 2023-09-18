@@ -4,16 +4,10 @@ import "../components-css/ProductDetail.css";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "./firebase/config";
 
-function ProductDetail({ products, cartItems, addToCart, removeFromCart }) {
+function ProductDetail() {
   const { id } = useParams();
 
-
   const [product, setProduct] = useState(null);
-
-
-
-
-
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -39,16 +33,20 @@ function ProductDetail({ products, cartItems, addToCart, removeFromCart }) {
   return (
     <div className="product-detail-container">
       <div className="product-detail">
-        <img
-          src={product?.imagenURL}
-          alt={product?.nombre}
-          className="product-image"
-        />
-        <div className="product-info">
-          <h2 className="product-name">{product?.nombre}</h2>
-          <p className="product-price">${product?.precio}</p>
-          <p className="product-detalle">{product?.detalle}</p>
-        </div>
+        {product && (
+          <div>
+            <img
+              src={product?.imagenURL}
+              alt={product?.nombre}
+              className="product-image"
+            />
+            <div className="product-info">
+              <h2 className="product-name">{product?.nombre}</h2>
+              <p className="product-price">${product?.precio}</p>
+              <p className="product-detalle">{product?.detalle}</p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -23,7 +23,6 @@ function Login() {
       e.preventDefault();
       signInWithEmailAndPassword(auth, formData.email, formData.password)
       .then((userCredential) => {
-      const user = userCredential.user;
       window.alert("Inicio de sesion exitoso")
       navigate("/")
       }) 
@@ -31,6 +30,7 @@ function Login() {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+             window.alert(errorCode, errorMessage);
       });
     };
   
