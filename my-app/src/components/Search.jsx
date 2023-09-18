@@ -8,10 +8,10 @@ function Search({ onSearch }) {
   };
 
   return (
-    <div className="search-bar">
+    <div className="search-container">
       <input
         type="text"
-        placeholder="Buscar productos"
+        placeholder="Buscar productos..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
