@@ -1,14 +1,13 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "../../components-css/Login.css";
-import { auth } from "../firebase/config";
-import { sendPasswordResetEmail } from "firebase/auth";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { sendPasswordResetEmail } from 'firebase/auth';
+import { auth } from '../../firebase/config';
 
 function ResetPassword() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
 
   const handleChange = (e) => {
@@ -21,18 +20,18 @@ function ResetPassword() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-      sendPasswordResetEmail(auth, formData.email)
-          .then(() => {
-                    window.alert(
-                      "Chequea tu correo para el resetear su contraseña");
-              navigate("/")
-              console.log("succesfully");
-         })
-         .catch((error) => {
-           const errorCode = error.code;
-           const errorMessage = error.message;
-           window.alert(errorCode, errorMessage);
-         });
+    sendPasswordResetEmail(auth, formData.email)
+      .then(() => {
+        // eslint-disable-next-line
+        window.alert('Chequea tu correo para el resetear su contraseña');
+        navigate('/');
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // eslint-disable-next-line
+        window.alert(errorCode, errorMessage);
+      });
   };
 
   return (

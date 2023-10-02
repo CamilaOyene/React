@@ -1,22 +1,18 @@
-import {getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import React, { useState } from "react";
-import {
-  Timestamp,
-  addDoc,
-  collection
-} from "firebase/firestore";
-import { NavLink } from "react-router-dom";
-import { TfiArrowCircleLeft } from "react-icons/tfi";
-import { db, storage } from "./firebase/config";
-
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import React, { useState } from 'react';
+import { Timestamp, addDoc, collection } from 'firebase/firestore';
+import { NavLink } from 'react-router-dom';
+import { TfiArrowCircleLeft } from 'react-icons/tfi';
+import { db, storage } from '../firebase/config';
 
 const initialState = {
-  name: "",
-  imagenURL: "",
+  name: '',
+  imagenURL: '',
   price: 0,
 };
 
-const AddProducts = () => {
+function AddProducts() {
   const [products, setProducts] = useState({ ...initialState });
   const [uploadProgress, setUploadProgress] = useState(0);
 
@@ -25,7 +21,7 @@ const AddProducts = () => {
 
     try {
       // eslint-disable-next-line
-      const docRef = addDoc(collection(db, "Productos"), {
+      const docRef = addDoc(collection(db, 'Productos'), {
         nombre: products.name,
         imagenURL: products.imagenURL,
         precio: Number(products.price),
@@ -33,45 +29,53 @@ const AddProducts = () => {
       });
       setUploadProgress(0);
       setProducts({ ...initialState });
-      window.alert("Excelente datos subidos satisfactoriamente!");
+      // eslint-disable-next-line
+      alert('Excelente datos subidos satisfactoriamente!');
     } catch (error) {
- window.alert(error)
+      // eslint-disable-next-line
+      alert(error);
     }
   };
 
-    const handleImageChange = (event) => {
-      let file = event.target.files?.[0];
-      if (event.target.files?.[0]) {
-        file = event.target.files[0];
-        const storageRef = ref(storage, file.name);
-        const uploadTask = uploadBytesResumable(storageRef, file);
+  const handleImageChange = (event) => {
+    const { files } = event.target;
+    const file = files[0];
 
-        uploadTask.on(
-          "state_changed",
-          (snapshot) => {
-            const progress =
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            setUploadProgress(progress);
-          },
-          (error) => {
-            window.alert(error)
-          },
-          () => {
-            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-              setProducts({ ...products, imagenURL: downloadURL });
-             window.alert("success")
-            });
-          }
-        );
-      }
-    };
+    if (file) {
+      const storageRef = ref(storage, file.name);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          setUploadProgress(progress);
+        },
+        (error) => {
+          // eslint-disable-next-line
+          alert(error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            setProducts({ ...products, imagenURL: downloadURL });
+            // eslint-disable-next-line
+            alert('success');
+          });
+        },
+      );
+    }
+  };
 
   return (
     <body className="flex flex-col items-center justify-center bg-[#111523] antialiased min-h-screen">
       <div className="container mx-auto my-60 min-h-screen mt-[150px] ">
         <div className="bg-neutral-800  relative shadow rounded-lg w-5/6 md:w-5/6 lg:w-4/6 xl:w-3/6 mx-auto">
-          <NavLink to={"/"}>
-            <button className="pr-98 pl-[20px] mt-3 vml-3 mobile:ml-0 mobile:mt-5">
+          <NavLink to="/">
+            <button
+              type="button"
+              className="pr-98 pl-[20px] mt-3 vml-3 mobile:ml-0 mobile:mt-5"
+            >
               <TfiArrowCircleLeft
                 size={28}
                 className="text-gray-400 hover:text-blue-600"
@@ -93,7 +97,7 @@ const AddProducts = () => {
                     {uploadProgress === 0 ? null : (
                       <div className="styles.progress">
                         <div
-                          className={"progress-bar"}
+                          className="progress-bar"
                           style={{ width: `${uploadProgress}%` }}
                         >
                           {uploadProgress < 100
@@ -110,7 +114,7 @@ const AddProducts = () => {
                       className="mobile:text-xs"
                       onChange={handleImageChange}
                     />
-                    {products.imagenURL === "" ? null : (
+                    {products.imagenURL === '' ? null : (
                       <input
                         type="text"
                         placeholder="Image URL"
@@ -123,10 +127,11 @@ const AddProducts = () => {
                   </div>
                 </div>
                 <div className="mb-4 relative ">
-                  <label className="text-gray-300 block  mb-2" htmlFor="precio">
+                  <label className="text-gray-300 block  mb-2" htmlFor="name">
                     Nombre:
                   </label>
                   <input
+                    id="name"
                     className="border border-gray-400 p-2 pl-8 w-full"
                     type="text"
                     required
@@ -143,17 +148,21 @@ const AddProducts = () => {
                   </label>
                   <span className="absolute left-0 top-0 px-2 py-10">$</span>
                   <input
+                    id="precio"
                     className="border border-gray-400 p-2 pl-8 w-full"
                     type="text"
                     required
                     name="precio"
-                    value={products?.price}
+                    value={products.price}
                     onChange={(e) =>
                       setProducts({ ...products, price: e.target.value })
                     }
                   />
                 </div>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <button
+                  type="button"
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                >
                   Guardar
                 </button>
               </form>
@@ -163,6 +172,6 @@ const AddProducts = () => {
       </div>
     </body>
   );
-};
+}
 
 export default AddProducts;
