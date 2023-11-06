@@ -4,13 +4,15 @@ import { collection, query, onSnapshot, orderBy } from 'firebase/firestore';
 import { useDispatch, useSelector } from 'react-redux';
 import { db } from '../firebase/config';
 import {
-  ADD_PRODUCT_TO_CART,
-  REMOVE_PRODUCT_FROM_CART,
+  // ADD_PRODUCT_TO_CART,
+  // REMOVE_PRODUCT_FROM_CART,
   STORE_PRODUCTS,
   selectProducts,
   selectedCategory,
 } from '../redux/slices/productSlice';
-import CartItem from '../CartItem/CartItem';
+// import CartItem from '../CartItem/CartItem';
+import ItemListContainer from '../ItemListContainer/ItemListContainer';
+import './Home.css';
 
 function Home() {
   const dispatch = useDispatch();
@@ -42,17 +44,40 @@ function Home() {
     getProducts();
   }, [currentCategory]);
 
-  const handleAddToCart = (product) => {
-    dispatch(ADD_PRODUCT_TO_CART(product));
-  };
+  // const handleAddToCart = (product) => {
+  //   dispatch(ADD_PRODUCT_TO_CART(product));
+  // };
 
-  const handleRemoveFromCart = (product) => {
-    dispatch(REMOVE_PRODUCT_FROM_CART(product.id));
-  };
-
+  // const handleRemoveFromCart = (product) => {
+  //   dispatch(REMOVE_PRODUCT_FROM_CART(product.id));
+  // };
+  // eslint-disable-next-line no-console
+  console.log('PRODUCTS', products);
   return (
-    <div className="container mx-auto py-8">
-      {products !== undefined && products.length > 0 ? (
+    <div>
+      {products.length > 0 ? (
+        <ItemListContainer
+          products={products}
+          currentCategory={currentCategory}
+        />
+      ) : (
+        <div className="divSinArticulos">
+          <h2>
+            No se encuentran artículos disponibles
+            <br />
+            Por favor, inicia sesión o regístrate.
+          </h2>
+          <div className="wrapper">
+            <div className="circle"> </div>
+            <div className="circle"> </div>
+            <div className="circle"> </div>
+            <div className="shadow"> </div>
+            <div className="shadow"> </div>
+            <div className="shadow"> </div>
+          </div>
+        </div>
+      )}
+      {/* {products !== undefined && products.length > 0 ? (
         <ul className="cart-list">
           {products.map((item, idx) => (
             <CartItem
@@ -71,7 +96,7 @@ function Home() {
           <br />
           Por favor, inicia sesión o regístrate.
         </p>
-      )}
+      )} */}
     </div>
   );
 }

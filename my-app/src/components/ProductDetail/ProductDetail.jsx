@@ -44,7 +44,7 @@ function ProductDetail() {
     <div className="product-detail-container">
       <div className="product-detail">
         {product && (
-          <div>
+          <div className="divDetail">
             <img
               src={product.imagenURL}
               alt={product.nombre}

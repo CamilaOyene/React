@@ -1,7 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import ButtonsCartItem from '../ButtonsCartItem/ButttonsCartItem';
 
-function CartItem({ itemKey, item, addToCart, removeFromCart, allowRemoval }) {
+function CartItem({ itemKey, item, addToCart, removeFromCart }) {
   return (
     <div>
       <li key={itemKey} className="cart-item">
@@ -13,18 +14,11 @@ function CartItem({ itemKey, item, addToCart, removeFromCart, allowRemoval }) {
           </div>
         </NavLink>
         <div>
-          <button className="buy" type="button" onClick={() => addToCart(item)}>
-            +
-          </button>
-          {allowRemoval && (
-            <button
-              className="buy"
-              type="button"
-              onClick={() => removeFromCart(item)}
-            >
-              -
-            </button>
-          )}
+          <ButtonsCartItem
+            addToCart={addToCart}
+            removeFromCart={removeFromCart}
+            item={item}
+          />
         </div>
       </li>
     </div>
