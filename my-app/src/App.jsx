@@ -10,6 +10,7 @@ import ResetPassword from './components/Auth/ResetPassword';
 import AddProducts from './components/AddProducts';
 import Footer from './components/Footer';
 import './App.css';
+import ShoppingHistory from './components/ShoppingHistory/ShoppingHistory';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/shopping-history" element={<ShoppingHistory />} />
         <Route path="/productos/:id" element={<ProductDetail />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />

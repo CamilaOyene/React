@@ -154,6 +154,11 @@ function Navbar() {
                 Carrito
               </Link>
             </li>
+            <li className="nav-item">
+              <Link className="dropdown-item nav-link" to="/shopping-history">
+                Historial de Compras
+              </Link>
+            </li>
           </ul>
           <Search onSearch={handleSearch} />
         </div>

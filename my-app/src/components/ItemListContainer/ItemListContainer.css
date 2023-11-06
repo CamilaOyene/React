@@ -1,0 +1,17 @@
+.conteinerItemList{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; 
+    min-height: 100vh;
+    /* width: 100vw; */
+    /* height: 100vh; */
+  }
+  
+  .containerCardsProducts {
+    display: flex; /* Configura una disposición en línea */
+    flex-wrap: wrap; /* Permite que las tarjetas se envuelvan a la siguiente línea cuando no caben en el ancho del contenedor */
+    justify-content: center; /* Centra las tarjetas horizontalmente */
+    gap: 10px; /* Agrega espacio entre las tarjetas */
+    height:100%; 
+}

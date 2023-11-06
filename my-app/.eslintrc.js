@@ -7,6 +7,7 @@ module.exports = {
     'react/no-array-index-key': 'off',
     'react/prop-types': 'off',
     'jsx-a11y/label-has-associated-control': 'off',
+    'no-unused-vars': 'off',
   },
   env: {
     browser: true,
